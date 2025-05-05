@@ -1,12 +1,42 @@
-# React + Vite
+# Virtual Study Group
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Virtual Study Group is a collaborative platform that enables users to form study groups, share resources, chat, and manage study sessions effectively. The platform enhances online learning through tools like chat, calendars, and a Pomodoro timer for better productivity.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Create and Join Study Groups**: Users can form new study groups or join existing ones with shared interests.  
+- **Shared Resources**: Upload and access documents, links, and notes relevant to the group’s study focus.  
+- **Chat System**: Built-in chat interface allows real-time or simulated messaging between group members.  
+- **Study Session Scheduler**: Use a static or Google Calendar-integrated schedule to plan sessions.  
+- **Pomodoro Timer**: Built-in timer to help members stay focused and study productively.  
+- **User Profiles**: Track joined groups, contributed resources, and optional activity logs.  
 
-## Expanding the ESLint configuration
+## How It Works
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1. **Create or Join Groups**: Start your own study group or search for existing ones to join.  
+2. **Collaborate**: Share documents, schedule meetings, and chat within the group.  
+3. **Stay Organized**: Use the calendar to keep track of study sessions.  
+4. **Boost Productivity**: Use the Pomodoro timer to study in focused intervals.  
+
+## Technologies Used
+
+- Frontend: [HTML, CSS, JavaScript, React, Vite]  
+
+## Getting Started
+
+1. Clone the repository:  
+    ```bash  
+    git clone https://github.com/yourusername/virtual-study-group.git  
+    ```  
+2. Navigate to the project directory:  
+    ```bash  
+    cd virtual-study-group  
+    ```  
+3. Install dependencies:  
+    ```bash  
+    npm install  
+    ```  
+4. Start the development server:  
+    ```bash  
+    npm run dev  
+    ```
