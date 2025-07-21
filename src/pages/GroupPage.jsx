@@ -1,32 +1,40 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ResourceCard from '../components/ResourceCard';
 import ChatMessage from '../components/ChatMessage';
 
 export default function GroupPage({ group }) {
     const [message, setMessage] = useState('');
-    const [messages, setMessages] = useState([
-        {
-            id: 1,
-            sender: 'Alex Johnson',
-            text: 'Hey everyone! Welcome to our study group. Feel free to introduce yourselves.',
-            time: '10:30 AM',
-            isCurrentUser: false
-        },
-        {
-            id: 2,
-            sender: 'You',
-            text: 'Hi Alex! Excited to be part of this group. Looking forward to learning together.',
-            time: '10:35 AM',
-            isCurrentUser: true
-        },
-        {
-            id: 3,
-            sender: 'Maria Garcia',
-            text: 'Hello! I\'m Maria. Does anyone have good resources for the upcoming exam?',
-            time: '10:40 AM',
-            isCurrentUser: false
-        }
-    ]);
+
+    const [messages, setMessages] = useState(() => {
+        const storedMessages = localStorage.getItem('groupMessages');
+        return storedMessages ? JSON.parse(storedMessages) : [
+            {
+                id: 1,
+                sender: 'Alex Johnson',
+                text: 'Hey everyone! Welcome to our study group. Feel free to introduce yourselves.',
+                time: '10:30 AM',
+                isCurrentUser: false
+            },
+            {
+                id: 2,
+                sender: 'You',
+                text: 'Hi Alex! Excited to be part of this group. Looking forward to learning together.',
+                time: '10:35 AM',
+                isCurrentUser: true
+            },
+            {
+                id: 3,
+                sender: 'Maria Garcia',
+                text: 'Hello! I\'m Maria. Does anyone have good resources for the upcoming exam?',
+                time: '10:40 AM',
+                isCurrentUser: false
+            }
+        ];
+    });
+
+    useEffect(() => {
+        localStorage.setItem('groupMessages', JSON.stringify(messages));
+    }, [messages]);
 
     const resources = [
         {
@@ -84,7 +92,7 @@ export default function GroupPage({ group }) {
                 <h1 className="group-title">{group?.name || 'Study Group'}</h1>
                 <button className="btn btn-primary">Invite Members</button>
             </div>
-            
+
             <div className="group-content">
                 <div>
                     <div className="group-resources">
@@ -96,14 +104,14 @@ export default function GroupPage({ group }) {
                         </div>
                         <button className="btn btn-outline">Upload Resource</button>
                     </div>
-                    
+
                     <div className="group-chat card">
                         <h2 className="card-header">Group Chat</h2>
                         <div className="chat-messages">
                             {messages.map(msg => (
-                                <ChatMessage 
-                                    key={msg.id} 
-                                    message={msg} 
+                                <ChatMessage
+                                    key={msg.id}
+                                    message={msg}
                                     isCurrentUser={msg.isCurrentUser}
                                 />
                             ))}
@@ -119,13 +127,13 @@ export default function GroupPage({ group }) {
                         </form>
                     </div>
                 </div>
-                
+
                 <div className="group-sidebar">
                     <div>
                         <h3>Group Info</h3>
                         <p>{group?.description || 'Group description goes here'}</p>
                     </div>
-                    
+
                     <div className="group-members">
                         <h3>Members ({members.length})</h3>
                         <div className="member-list">
@@ -140,13 +148,13 @@ export default function GroupPage({ group }) {
                             ))}
                         </div>
                     </div>
-                    
+
                     <div className="group-calendar">
                         <div className="calendar-header">
                             <h3>Upcoming Sessions</h3>
                             <button className="btn btn-outline btn-sm">Add</button>
                         </div>
-                        
+
                         <div className="calendar-grid">
                             <div className="calendar-day header">Sun</div>
                             <div className="calendar-day header">Mon</div>
@@ -155,7 +163,7 @@ export default function GroupPage({ group }) {
                             <div className="calendar-day header">Thu</div>
                             <div className="calendar-day header">Fri</div>
                             <div className="calendar-day header">Sat</div>
-                            
+
                             {Array.from({ length: 31 }).map((_, i) => {
                                 const day = i + 1;
                                 let className = 'calendar-day';

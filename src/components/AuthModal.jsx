@@ -1,41 +1,64 @@
 import { useState } from 'react';
+import { auth } from './firebase'; // Make sure firebase.js is set up
+import {
+    signInWithEmailAndPassword,
+    createUserWithEmailAndPassword,
+    updateProfile
+} from 'firebase/auth';
 
 export default function AuthModal({ onClose, onLogin }) {
     const [activeTab, setActiveTab] = useState('login');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
+    const [error, setError] = useState('');
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // In a real app, you would validate and send to backend
-        onLogin();
+        setError('');
+
+        try {
+            if (activeTab === 'login') {
+                const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                console.log('Logged in:', userCredential.user);
+            } else {
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                await updateProfile(userCredential.user, { displayName: name });
+                console.log('Signed up:', userCredential.user);
+            }
+
+            onLogin(); // Notify parent component
+            onClose(); // Optionally close modal
+        } catch (err) {
+            console.error('Auth error:', err.message);
+            setError(err.message); // Display error below form
+        }
     };
 
     return (
         <div className="modal-overlay">
             <div className="modal-content">
                 <button className="modal-close" onClick={onClose}>×</button>
-                
+
                 <div className="modal-header">
                     <h2>{activeTab === 'login' ? 'Login' : 'Sign Up'}</h2>
                 </div>
-                
+
                 <div className="auth-tabs">
-                    <div 
+                    <div
                         className={`auth-tab ${activeTab === 'login' ? 'active' : ''}`}
                         onClick={() => setActiveTab('login')}
                     >
                         Login
                     </div>
-                    <div 
+                    <div
                         className={`auth-tab ${activeTab === 'signup' ? 'active' : ''}`}
                         onClick={() => setActiveTab('signup')}
                     >
                         Sign Up
                     </div>
                 </div>
-                
+
                 <form onSubmit={handleSubmit}>
                     {activeTab === 'signup' && (
                         <div className="form-group">
@@ -50,7 +73,7 @@ export default function AuthModal({ onClose, onLogin }) {
                             />
                         </div>
                     )}
-                    
+
                     <div className="form-group">
                         <label htmlFor="email">Email</label>
                         <input
@@ -62,7 +85,7 @@ export default function AuthModal({ onClose, onLogin }) {
                             required
                         />
                     </div>
-                    
+
                     <div className="form-group">
                         <label htmlFor="password">Password</label>
                         <input
@@ -74,7 +97,9 @@ export default function AuthModal({ onClose, onLogin }) {
                             required
                         />
                     </div>
-                    
+
+                    {error && <div className="error-message">{error}</div>}
+
                     <button type="submit" className="btn btn-primary w-100 mt-2">
                         {activeTab === 'login' ? 'Login' : 'Sign Up'}
                     </button>
