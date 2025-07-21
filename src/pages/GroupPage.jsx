@@ -86,6 +86,14 @@ export default function GroupPage({ group }) {
         }
     };
 
+    const openDrive = () => {
+        window.open("https://drive.google.com/drive/folders/1poW4Waq6FoWMTgz6s1SuAuxtw33-RzDd?usp=drive_link", "_blank");
+    };
+
+    const openCalendar = () => {
+        window.open("https://calendar.google.com/calendar/u/0/r", "_blank");
+    };
+
     return (
         <div>
             <div className="group-header">
@@ -99,10 +107,12 @@ export default function GroupPage({ group }) {
                         <h2 className="card-header">Shared Resources</h2>
                         <div className="resource-list">
                             {resources.map(resource => (
-                                <ResourceCard key={resource.id} resource={resource} />
+                                <div key={resource.id} onClick={openDrive} style={{ cursor: 'pointer' }}>
+                                    <ResourceCard resource={resource} />
+                                </div>
                             ))}
                         </div>
-                        <button className="btn btn-outline">Upload Resource</button>
+                        <button className="btn btn-outline" onClick={openDrive}>Upload Resource</button>
                     </div>
 
                     <div className="group-chat card">
@@ -152,29 +162,10 @@ export default function GroupPage({ group }) {
                     <div className="group-calendar">
                         <div className="calendar-header">
                             <h3>Upcoming Sessions</h3>
-                            <button className="btn btn-outline btn-sm">Add</button>
+                            <button className="btn btn-outline btn-sm" onClick={openCalendar}>Google Calendar</button>
                         </div>
-
                         <div className="calendar-grid">
-                            <div className="calendar-day header">Sun</div>
-                            <div className="calendar-day header">Mon</div>
-                            <div className="calendar-day header">Tue</div>
-                            <div className="calendar-day header">Wed</div>
-                            <div className="calendar-day header">Thu</div>
-                            <div className="calendar-day header">Fri</div>
-                            <div className="calendar-day header">Sat</div>
-
-                            {Array.from({ length: 31 }).map((_, i) => {
-                                const day = i + 1;
-                                let className = 'calendar-day';
-                                if (day === 15) className += ' today';
-                                if (day === 8 || day === 22) className += ' event';
-                                return (
-                                    <div key={day} className={className}>
-                                        {day}
-                                    </div>
-                                );
-                            })}
+                            <p style={{ padding: '1rem', textAlign: 'center' }}>Click the button above to view or add events in your Google Calendar.</p>
                         </div>
                     </div>
                 </div>
