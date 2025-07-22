@@ -903,4 +903,121 @@ body {
   margin-bottom: 0.75rem;
 }
 
+@media (max-width: 992px) {
+  .group-sidebar {
+    width: 100%;
+    margin-top: 2rem;
+  }
+
+  .group-content {
+    grid-template-columns: 1fr;
+  }
+
+  .chat-input input, .chat-input button {
+    font-size: 0.9rem;
+  }
+
+  .card, .feature-card, .testimonial-card, .team-card {
+    padding: 1rem;
+  }
+
+  .navbar-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .footer-content {
+    text-align: center;
+  }
+
+  .profile-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .profile-stats {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero h1 {
+    font-size: 1.8rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+
+  .btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .form-control {
+    padding: 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  .modal-content {
+    padding: 1.5rem;
+  }
+
+  .calendar-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .calendar-day {
+    font-size: 0.75rem;
+    padding: 0.4rem;
+  }
+
+  .chat-input {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .chat-input input {
+    border-radius: 4px;
+  }
+
+  .chat-input button {
+    border-radius: 4px;
+  }
+
+  .setting-btn {
+    width: 24px;
+    height: 24px;
+    font-size: 0.8rem;
+  }
+
+  .pomodoro-display {
+    font-size: 2.5rem;
+  }
+
+  .setting-label {
+    font-size: 0.9rem;
+  }
+
+  .footer-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .footer-social {
+    justify-content: center;
+  }
+}
+
+
 
