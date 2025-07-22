@@ -9,12 +9,7 @@ export default function Footer({ navigateTo }) {
                   <a href="#" className="footer-link" onClick={(e) => { e.preventDefault(); navigateTo('about'); }}>About</a>
               </div>
               
-              <div className="footer-social">
-                  <a href="#" className="social-icon">📘</a>
-                  <a href="#" className="social-icon">🐦</a>
-                  <a href="#" className="social-icon">📸</a>
-                  <a href="#" className="social-icon">🔗</a>
-              </div>
+              
               
               <p className="footer-copyright">© 2025 Virtual Study Group. All rights reserved.</p>
           </div>
